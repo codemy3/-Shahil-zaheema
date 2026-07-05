@@ -185,10 +185,10 @@ export default function InvitationCard() {
                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")` }} 
           />
 
-          <h1 className="font-script font-normal text-[clamp(2.5rem,9vw,4.5rem)] leading-none text-[#6B4C2F] drop-shadow-md opacity-95">
+          <h1 className="font-script font-normal shimmer-text-slow text-[clamp(2.5rem,9vw,4.5rem)] leading-none text-[#6B4C2F] drop-shadow-md opacity-95">
             Moideen
           </h1>
-          <h1 className="font-script font-normal text-[clamp(2.5rem,9vw,4.5rem)] leading-none text-[#6B4C2F] drop-shadow-md opacity-95 -mt-2">
+          <h1 className="font-script font-normal shimmer-text-slow text-[clamp(2.5rem,9vw,4.5rem)] leading-none text-[#6B4C2F] drop-shadow-md opacity-95 -mt-2">
             Shahil
           </h1>
           
@@ -196,23 +196,34 @@ export default function InvitationCard() {
             &amp;
           </p>
           
-          <h1 className="font-script font-normal text-[clamp(2.5rem,9vw,4.5rem)] leading-none text-[#6B4C2F] drop-shadow-md opacity-95">
+          <h1 className="font-script font-normal shimmer-text-slow text-[clamp(2.5rem,9vw,4.5rem)] leading-none text-[#6B4C2F] drop-shadow-md opacity-95">
             Mariyam
           </h1>
-          <h1 className="font-script font-normal text-[clamp(2.5rem,9vw,4.5rem)] leading-none mb-6 text-[#6B4C2F] drop-shadow-md opacity-95 -mt-2">
+          <h1 className="font-script font-normal shimmer-text-slow text-[clamp(2.5rem,9vw,4.5rem)] leading-none mb-6 text-[#6B4C2F] drop-shadow-md opacity-95 -mt-2">
             Zaheema
           </h1>
 
-          {/* Frosted Glass Pill for Date & Location ensuring 100% readability */}
+        {/* Frosted Glass Pill for Date & Location ensuring 100% readability */}
           <motion.div 
-            className="flex flex-col items-center px-6 py-3 rounded-full bg-[#FFFDF9]/60 backdrop-blur-md border border-white/50 shadow-[0_8px_32px_rgba(139,105,20,0.15)]"
+            className="flex flex-col items-center px-6 py-3 rounded-full bg-[#FFFDF9]/60 backdrop-blur-md border border-white/50 shadow-[0_8px_32px_rgba(139,105,20,0.15)] relative overflow-hidden group"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
           >
+            {/* Animated shimmer passing through the pill */}
+            <motion.div 
+              className="absolute inset-0 z-[-1] pointer-events-none"
+              style={{
+                background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)",
+                width: "50%",
+              }}
+              animate={{ x: ["-200%", "300%"] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", repeatDelay: 1 }}
+            />
+            
             <p className="text-[10px] uppercase tracking-[0.25em] font-serif font-bold text-[#8B6914] mb-1">
               Wednesday, 22nd July 2026
             </p>
-            <div className="w-10 h-px mb-1 bg-gradient-to-r from-transparent via-[#C4943A] to-transparent opacity-60" />
+            <div className="w-10 h-px mb-1 animated-divider" />
             <p className="text-[10px] tracking-[0.1em] font-serif italic text-[#5A4535] font-semibold">
               Nikah at 11:00 AM &middot; Mangaluru
             </p>

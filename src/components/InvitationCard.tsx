@@ -121,7 +121,7 @@ export default function InvitationCard() {
           style={{ y: palaceY }}
         >
           <Image
-            src="/palace.png"
+            src="/palace.webp"
             alt=""
             fill
             className="object-cover object-bottom opacity-[0.35] mix-blend-multiply"
@@ -141,7 +141,7 @@ export default function InvitationCard() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <Image src="/curtain.png" alt="" fill className="object-cover object-top" priority />
+          <Image src="/curtain.webp" alt="" fill className="object-cover object-top" priority />
         </motion.div>
 
         {/* Top Chandelier (Parallax + Infinite Sway) */}
@@ -158,7 +158,7 @@ export default function InvitationCard() {
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           >
             <Image
-              src="/chandelier.png"
+              src="/chandelier.webp"
               alt=""
               fill
               className="object-contain"
@@ -185,21 +185,21 @@ export default function InvitationCard() {
                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")` }} 
           />
 
-          <h1 className="font-script font-normal shimmer-text-slow text-[clamp(2.5rem,9vw,4.5rem)] leading-none text-[#6B4C2F] drop-shadow-md opacity-95">
+          <h1 className="font-script font-normal shimmer-text-slow text-[clamp(2.5rem,10vw,4.5rem)] leading-tight text-[#6B4C2F] drop-shadow-md opacity-95 tracking-wide px-2">
             Moideen
           </h1>
-          <h1 className="font-script font-normal shimmer-text-slow text-[clamp(2.5rem,9vw,4.5rem)] leading-none text-[#6B4C2F] drop-shadow-md opacity-95 -mt-2">
+          <h1 className="font-script font-normal shimmer-text-slow text-[clamp(2.5rem,10vw,4.5rem)] leading-tight text-[#6B4C2F] drop-shadow-md opacity-95 tracking-wide px-2 -mt-4">
             Shahil
           </h1>
           
-          <p className="font-script font-normal text-2xl md:text-3xl my-2 text-[#B08639] opacity-90">
-            &amp;
+          <p className="font-script font-normal text-2xl md:text-3xl my-1 text-[#B08639] opacity-90">
+            &
           </p>
           
-          <h1 className="font-script font-normal shimmer-text-slow text-[clamp(2.5rem,9vw,4.5rem)] leading-none text-[#6B4C2F] drop-shadow-md opacity-95">
+          <h1 className="font-script font-normal shimmer-text-slow text-[clamp(2.5rem,10vw,4.5rem)] leading-tight text-[#6B4C2F] drop-shadow-md opacity-95 tracking-wide px-2">
             Mariyam
           </h1>
-          <h1 className="font-script font-normal shimmer-text-slow text-[clamp(2.5rem,9vw,4.5rem)] leading-none mb-6 text-[#6B4C2F] drop-shadow-md opacity-95 -mt-2">
+          <h1 className="font-script font-normal shimmer-text-slow text-[clamp(2.5rem,10vw,4.5rem)] leading-tight mb-8 text-[#6B4C2F] drop-shadow-md opacity-95 tracking-wide px-2 -mt-4">
             Zaheema
           </h1>
 
@@ -466,7 +466,7 @@ export default function InvitationCard() {
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
           >
             <Image
-              src="/chandelier.png"
+              src="/chandelier.webp"
               alt=""
               fill
               className="object-contain opacity-90"

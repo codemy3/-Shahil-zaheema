@@ -19,22 +19,22 @@ const sealIdleTransition = {
 };
 
 const sealLiftTransition = {
-  duration: 0.45,
+  duration: 0.8,
   ease: [0.22, 1, 0.36, 1] as const,
 };
 
 const flapTransition = {
-  duration: 0.38,
-  ease: [0.3, 0, 0.2, 1] as const,
+  duration: 1.2, // Significantly slowed down for a smoother, premium feel
+  ease: [0.25, 1, 0.5, 1] as const, // Elegant decelerating curve
 };
 
 const cardRevealTransition = {
-  duration: 0.6,
-  delay: 0.45, // starts mid-peel, not before it — matches the overlap in the video
-  ease: [0.16, 1, 0.3, 1] as const,
+  duration: 1.2,
+  delay: 0.4, // Starts as the flaps are actively opening
+  ease: [0.22, 1, 0.36, 1] as const,
 };
 
-const ENVELOPE_LIFETIME_MS = 950; // full opening sequence length before we unmount it
+const ENVELOPE_LIFETIME_MS = 2000; // extended lifetime to match the slower animations
 
 export default function Envelope() {
   const [isOpen, setIsOpen] = useState(false);
@@ -95,7 +95,7 @@ export default function Envelope() {
       <motion.div
         className="absolute bottom-0 left-0 right-0 z-[5] pointer-events-none"
         initial={{ opacity: 0, y: 30 }}
-        animate={isOpen ? { opacity: 1, y: 0 } : { opacity: 0.08, y: 15 }}
+        animate={isOpen ? { opacity: 0.22, y: 0 } : { opacity: 0.08, y: 15 }}
         transition={{
           duration: 1.4,
           delay: isOpen ? 0.6 : 0,
@@ -129,8 +129,7 @@ export default function Envelope() {
       />
 
       {/* ════════════════════════════════════════ */}
-      {/*  INVITATION CONTENT (mounts on tap,     */}
-      {/*  circle-wipes in, overlapping the peel) */}
+      {/*  INVITATION CONTENT                     */}
       {/* ════════════════════════════════════════ */}
       <AnimatePresence>
         {isOpen && (
@@ -148,14 +147,7 @@ export default function Envelope() {
       </AnimatePresence>
 
       {/* ════════════════════════════════════════ */}
-      {/*  ENVELOPE — stays mounted through the    */}
-      {/*  whole open sequence so `animate` props  */}
-      {/*  actually get to play, then is removed.  */}
-      {/*  THIS is the fix: previously this whole  */}
-      {/*  block was `{!isOpen && (...)}`, so it    */}
-      {/*  unmounted the instant isOpen flipped,    */}
-      {/*  and none of the flap/seal animations     */}
-      {/*  below ever had a chance to run.          */}
+      {/*  ENVELOPE                               */}
       {/* ════════════════════════════════════════ */}
       <AnimatePresence>
         {showEnvelope && (
@@ -164,11 +156,11 @@ export default function Envelope() {
             className="absolute inset-0 z-[25]"
             style={{
               pointerEvents: isOpen ? "none" : "auto",
-              perspective: "1800px", // REQUIRED: makes rotateX/rotateY read as 3D folds
+              perspective: "1800px",
             }}
             exit={{ opacity: 0, transition: { duration: 0.3, delay: 0.55 } }}
           >
-            {/* Solid base rectangular card (covers full screen) */}
+            {/* Solid base rectangular card */}
             <motion.div
               className="absolute inset-0"
               style={{ backgroundColor: "#efe5d8" }}
@@ -179,11 +171,10 @@ export default function Envelope() {
             {/* Bottom Flap — peels back on its bottom hinge */}
             <motion.div
               className="absolute left-0 bottom-0 w-full h-[54%] pointer-events-none origin-bottom"
-              style={{ zIndex: 1, transformStyle: "preserve-3d" }}
-              animate={isOpen ? { rotateX: 25 } : { rotateX: 0 }}
+              style={{ zIndex: 4, transformStyle: "preserve-3d" }}
+              animate={isOpen ? { rotateX: 180 } : { rotateX: 0 }}
               transition={{ ...flapTransition, delay: isOpen ? 0.15 : 0 }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/bottom-paper.png"
                 alt="Envelope bottom flap"
@@ -197,10 +188,9 @@ export default function Envelope() {
             <motion.div
               className="absolute left-0 top-0 w-[55%] h-full pointer-events-none origin-left"
               style={{ zIndex: 2, transformStyle: "preserve-3d" }}
-              animate={isOpen ? { rotateY: 25 } : { rotateY: 0 }}
+              animate={isOpen ? { rotateY: -180 } : { rotateY: 0 }}
               transition={{ ...flapTransition, delay: isOpen ? 0.15 : 0 }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/right-paper.png"
                 alt="Envelope left flap"
@@ -217,10 +207,9 @@ export default function Envelope() {
             <motion.div
               className="absolute right-0 top-0 w-[55%] h-full pointer-events-none origin-right"
               style={{ zIndex: 3, transformStyle: "preserve-3d" }}
-              animate={isOpen ? { rotateY: -25 } : { rotateY: 0 }}
+              animate={isOpen ? { rotateY: 180 } : { rotateY: 0 }}
               transition={{ ...flapTransition, delay: isOpen ? 0.18 : 0 }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/left-paper.png"
                 alt="Envelope right flap"
@@ -237,10 +226,9 @@ export default function Envelope() {
             <motion.div
               className="absolute left-0 top-0 w-full h-[44%] pointer-events-none origin-top"
               style={{ zIndex: 5, transformStyle: "preserve-3d" }}
-              animate={isOpen ? { rotateX: -28 } : { rotateX: 0 }}
+              animate={isOpen ? { rotateX: -180 } : { rotateX: 0 }}
               transition={{ ...flapTransition, delay: isOpen ? 0.22 : 0 }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/top-paper.png"
                 alt="Envelope top flap"
@@ -253,9 +241,7 @@ export default function Envelope() {
               />
             </motion.div>
 
-            {/* Seal — one element that idles, then lifts + fades on tap.
-                (Previously this was two separate conditionally-mounted
-                elements, so the "lift away" version never rendered.) */}
+            {/* Seal */}
             <motion.div
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30"
               style={{ width: "280px", height: "300px" }}
@@ -278,7 +264,7 @@ export default function Envelope() {
               />
             </motion.div>
 
-            {/* Tap target sits on top of the seal, only active while closed */}
+            {/* Tap target */}
             {!isOpen && (
               <button
                 type="button"
@@ -299,7 +285,7 @@ export default function Envelope() {
               />
             )}
 
-            {/* ── Tap to Open / Appuyez pour ouvrir text & ornament ── */}
+            {/* ── Tap to Open text ── */}
             <motion.div
               className="absolute bottom-[10%] left-1/2 -translate-x-1/2 flex flex-col items-center text-center z-[15] pointer-events-none"
               initial={{ opacity: 0, y: 15 }}
@@ -342,12 +328,8 @@ export default function Envelope() {
         )}
       </AnimatePresence>
 
-      {/* ── Decorative thin border frame ── */}
       <div className="absolute inset-2 border border-[#C4943A]/[0.08] pointer-events-none z-[3]" />
 
-      {/* ════════════════════════════════════════ */}
-      {/*  MUSIC PLAYER (floating button)          */}
-      {/* ════════════════════════════════════════ */}
       <audio ref={audioRef} src="/reference.mp4" loop preload="auto" />
 
       <AnimatePresence>
@@ -384,13 +366,11 @@ export default function Envelope() {
             aria-label={isPlaying ? "Pause music" : "Play music"}
           >
             {isPlaying ? (
-              /* Pause icon */
               <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4943A">
                 <rect x="5" y="3" width="4" height="18" rx="1.5" />
                 <rect x="15" y="3" width="4" height="18" rx="1.5" />
               </svg>
             ) : (
-              /* Music note icon */
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C4943A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M9 18V5l12-2v13" />
                 <circle cx="6" cy="18" r="3" />

@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+:root {
+  --gold-deep: #8B6914;
+  --gold-rich: #C4943A;
+  --gold-warm: #D4A84B;
+  --gold-light: #E8C882;
+  --gold-pale: #F5E6C8;
+  --cream: #FFF8EE;
+  --cream-warm: #F7EBD7;
+  --brown-dark: #3D2B1A;
+  --brown-medium: #6B4C2F;
+  --brown-soft: #8B6F50;
+  --amber-glow: rgba(196, 148, 58, 0.35);
+}
+
+@theme inline {
+  --color-background: var(--cream);
+  --color-foreground: var(--brown-dark);
+  --font-cormorant: var(--font-cormorant);
+  --font-great-vibes: var(--font-great-vibes);
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  background: var(--cream);
+  color: var(--brown-dark);
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  overflow: hidden;
+}
+
+/* ─── Animations ────────────────────────────────────── */
+
+@keyframes sealPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 12px rgba(196, 148, 58, 0.4))
+            drop-shadow(0 0 30px rgba(196, 148, 58, 0.15));
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(196, 148, 58, 0.65))
+            drop-shadow(0 0 45px rgba(196, 148, 58, 0.25));
+    transform: translate(-50%, -50%) scale(1.03);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatChandelier {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes tapGlow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes goldParticle {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-60px) scale(0.3);
+  }
+}
+
+/* ─── Utility Classes ───────────────────────────────── */
+
+.font-script {
+  font-family: var(--font-great-vibes), "Great Vibes", cursive;
+}
+
+.font-serif {
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+}
+
+.seal-pulse {
+  animation: sealPulse 2.8s ease-in-out infinite;
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    var(--gold-rich) 0%,
+    var(--gold-light) 25%,
+    #FFF5D6 50%,
+    var(--gold-light) 75%,
+    var(--gold-rich) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+.chandelier-float {
+  animation: floatChandelier 5s ease-in-out infinite;
+}
+
+.tap-glow {
+  animation: tapGlow 2s ease-in-out infinite;
+}
+
+/* Gold ornamental divider */
+.gold-divider {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold-rich),
+    var(--gold-light),
+    var(--gold-rich),
+    transparent
+  );
+}
+
+.gold-divider::before {
+  content: "✦";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--gold-rich);
+  font-size: 10px;
+  background: var(--cream);
+  padding: 0 8px;
+}

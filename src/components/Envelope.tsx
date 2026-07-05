@@ -104,7 +104,7 @@ export default function Envelope() {
       >
         <div className="relative w-full h-[38vh]">
           <Image
-            src="/palace.png"
+            src="/palace.webp"
             alt="Palace backdrop"
             fill
             className="object-cover object-top"

@@ -5,36 +5,28 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import InvitationCard from "./InvitationCard";
 
-/* ───────── Transition Configs (matched to reference video, frame-by-frame) ─────────
-   Reference timeline:
-   0.00s        idle, seal breathing
-   tap (0.00s)  seal lifts + fades (~0.45s)
-   +0.15s       flaps peel back fast (~0.35-0.4s), top flap slightly after sides
-   +0.45s       card reveal circle-wipe starts, overlapping the tail of the peel
-   ~0.95s       envelope fully gone
-*/
-
+/* ───────── Transition Configs ───────── */
 const sealIdleTransition = {
   scale: { repeat: Infinity, duration: 2.5, ease: "easeInOut" as const },
 };
 
 const sealLiftTransition = {
-  duration: 0.8,
+  duration: 1.2, // ⬅️ Slowed down from 0.8s so it matches the slower vibe
   ease: [0.22, 1, 0.36, 1] as const,
 };
 
 const flapTransition = {
-  duration: 1.2, // Significantly slowed down for a smoother, premium feel
-  ease: [0.25, 1, 0.5, 1] as const, // Elegant decelerating curve
+  duration: 3.5, // ⬅️ Massively increased to 3.5s for a very slow, heavy peel
+  ease: [0.25, 1, 0.5, 1] as const, 
 };
 
 const cardRevealTransition = {
-  duration: 1.2,
-  delay: 0.4, // Starts as the flaps are actively opening
+  duration: 2.0, // ⬅️ Slower reveal (was 1.5)
+  delay: 1.5, // ⬅️ Waits 1.5s for the flaps to get halfway open before revealing
   ease: [0.22, 1, 0.36, 1] as const,
 };
 
-const ENVELOPE_LIFETIME_MS = 2000; // extended lifetime to match the slower animations
+const ENVELOPE_LIFETIME_MS = 5500; // ⬅️ Extended to 5.5s so the envelope stays alive during the long animation
 
 export default function Envelope() {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,7 +38,7 @@ export default function Envelope() {
     if (isOpen) return;
     setIsOpen(true);
     window.setTimeout(() => setShowEnvelope(false), ENVELOPE_LIFETIME_MS);
-    // Start music on user interaction (required for mobile autoplay policy)
+    
     if (audioRef.current) {
       audioRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
     }
@@ -90,15 +82,15 @@ export default function Envelope() {
       />
 
       {/* ════════════════════════════════════════ */}
-      {/*  PALACE BACKDROP (Bottom)               */}
+      {/*  PALACE BACKDROP (Bottom)                */}
       {/* ════════════════════════════════════════ */}
       <motion.div
         className="absolute bottom-0 left-0 right-0 z-[5] pointer-events-none"
         initial={{ opacity: 0, y: 30 }}
         animate={isOpen ? { opacity: 0.22, y: 0 } : { opacity: 0.08, y: 15 }}
         transition={{
-          duration: 1.4,
-          delay: isOpen ? 0.6 : 0,
+          duration: 2.0, // ⬅️ Slowed backdrop reveal
+          delay: isOpen ? 1.0 : 0,
           ease: [0.16, 1, 0.3, 1],
         }}
       >
@@ -129,7 +121,7 @@ export default function Envelope() {
       />
 
       {/* ════════════════════════════════════════ */}
-      {/*  INVITATION CONTENT                     */}
+      {/*  INVITATION CONTENT                      */}
       {/* ════════════════════════════════════════ */}
       <AnimatePresence>
         {isOpen && (
@@ -147,7 +139,7 @@ export default function Envelope() {
       </AnimatePresence>
 
       {/* ════════════════════════════════════════ */}
-      {/*  ENVELOPE                               */}
+      {/*  ENVELOPE                                */}
       {/* ════════════════════════════════════════ */}
       <AnimatePresence>
         {showEnvelope && (
@@ -158,22 +150,23 @@ export default function Envelope() {
               pointerEvents: isOpen ? "none" : "auto",
               perspective: "1800px",
             }}
-            exit={{ opacity: 0, transition: { duration: 0.3, delay: 0.55 } }}
+            exit={{ opacity: 0, transition: { duration: 0.8, delay: 0.55 } }}
           >
             {/* Solid base rectangular card */}
             <motion.div
               className="absolute inset-0"
               style={{ backgroundColor: "#efe5d8" }}
               animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-              transition={{ duration: 0.3, delay: isOpen ? 0.5 : 0 }}
+              // ⬅️ Delayed so it waits for the 3.5s flaps to get out of the way
+              transition={{ duration: 1.0, delay: isOpen ? 2.0 : 0 }} 
             />
 
-            {/* Bottom Flap — peels back on its bottom hinge */}
+            {/* Bottom Flap */}
             <motion.div
               className="absolute left-0 bottom-0 w-full h-[54%] pointer-events-none origin-bottom"
               style={{ zIndex: 1, transformStyle: "preserve-3d" }}
               animate={isOpen ? { rotateX: 180 } : { rotateX: 0 }}
-              transition={{ ...flapTransition, delay: isOpen ? 0.15 : 0 }}
+              transition={{ ...flapTransition, delay: isOpen ? 0.2 : 0 }}
             >
               <img
                 src="/bottom-paper.webp"
@@ -184,12 +177,12 @@ export default function Envelope() {
               />
             </motion.div>
 
-            {/* Left Flap — peels back on its left hinge */}
+            {/* Left Flap */}
             <motion.div
               className="absolute left-0 top-0 w-[55%] h-full pointer-events-none origin-left"
               style={{ zIndex: 2, transformStyle: "preserve-3d" }}
               animate={isOpen ? { rotateY: -180 } : { rotateY: 0 }}
-              transition={{ ...flapTransition, delay: isOpen ? 0.15 : 0 }}
+              transition={{ ...flapTransition, delay: isOpen ? 0.2 : 0 }}
             >
               <img
                 src="/right-paper.webp"
@@ -203,12 +196,12 @@ export default function Envelope() {
               />
             </motion.div>
 
-            {/* Right Flap — mirror of left */}
+            {/* Right Flap */}
             <motion.div
               className="absolute right-0 top-0 w-[55%] h-full pointer-events-none origin-right"
               style={{ zIndex: 3, transformStyle: "preserve-3d" }}
               animate={isOpen ? { rotateY: 180 } : { rotateY: 0 }}
-              transition={{ ...flapTransition, delay: isOpen ? 0.18 : 0 }}
+              transition={{ ...flapTransition, delay: isOpen ? 0.25 : 0 }}
             >
               <img
                 src="/left-paper.webp"
@@ -222,12 +215,12 @@ export default function Envelope() {
               />
             </motion.div>
 
-            {/* Top Flap — opens last, was on top, folds back the furthest */}
+            {/* Top Flap */}
             <motion.div
               className="absolute left-0 top-0 w-full h-[44%] pointer-events-none origin-top"
               style={{ zIndex: 5, transformStyle: "preserve-3d" }}
               animate={isOpen ? { rotateX: -180 } : { rotateX: 0 }}
-              transition={{ ...flapTransition, delay: isOpen ? 0.22 : 0 }}
+              transition={{ ...flapTransition, delay: isOpen ? 0.35 : 0 }}
             >
               <img
                 src="/top-paper.webp"
@@ -252,14 +245,6 @@ export default function Envelope() {
               }
               transition={isOpen ? sealLiftTransition : sealIdleTransition}
             >
-              {/* Small subtle orbiting ring to hint at interactivity */}
-              <motion.div
-                className="absolute inset-0 rounded-full border border-[rgba(196,148,58,0.3)] pointer-events-none"
-                style={{ scale: 1.15 }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-              />
-
               <Image
                 src="/seal.webp"
                 alt="Golden wax seal"
@@ -271,10 +256,9 @@ export default function Envelope() {
                 draggable={false}
               />
 
-              {/* Tap to open text positioned right below the seal */}
               <motion.p
-                className="absolute -bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap text-[12px] uppercase tracking-[0.2em] font-serif text-[#9B8A70]"
-                animate={{ opacity: [0.5, 1, 0.5] }}
+                className="absolute -bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap text-[16px] uppercase tracking-[0.2em] font-serif text-[#C4943A]"
+                animate={{ opacity: [0.6, 1, 0.6] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               >
                 Tap to open
@@ -307,7 +291,7 @@ export default function Envelope() {
 
       <div className="absolute inset-2 border border-[#C4943A]/[0.08] pointer-events-none z-[3]" />
 
-      <audio ref={audioRef} src="/reference.mp4" loop preload="auto" />
+      <audio ref={audioRef} src="/music.mp3" loop preload="auto" />
 
       <AnimatePresence>
         {isOpen && (
@@ -315,7 +299,7 @@ export default function Envelope() {
             key="music-btn"
             type="button"
             onClick={toggleMusic}
-            className="absolute top-5 right-5 z-[60] flex items-center justify-center rounded-full outline-none border-none"
+            className="absolute bottom-5 right-5 z-[60] flex items-center justify-center rounded-full outline-none border-none"
             style={{
               width: "42px",
               height: "42px",
@@ -336,8 +320,8 @@ export default function Envelope() {
             }}
             exit={{ opacity: 0, scale: 0.6 }}
             transition={{
-              opacity: { delay: 1.2, duration: 0.5 },
-              scale: { delay: 1.2, duration: 0.5 },
+              opacity: { delay: 1.5, duration: 0.5 },
+              scale: { delay: 1.5, duration: 0.5 },
               boxShadow: isPlaying ? { repeat: Infinity, duration: 2, ease: "easeInOut" } : { duration: 0.3 },
             }}
             aria-label={isPlaying ? "Pause music" : "Play music"}
@@ -355,6 +339,31 @@ export default function Envelope() {
               </svg>
             )}
           </motion.button>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isPlaying && (
+          <motion.div
+            key="music-playing-indicator"
+            className="absolute bottom-[82px] right-5 z-[60] flex h-12 w-12 items-center justify-center rounded-full border border-[#C4943A]/45 bg-[rgba(252,248,242,0.92)] text-[#C4943A] shadow-[0_6px_20px_rgba(139,105,20,0.14)]"
+            initial={{ opacity: 0, y: 10, scale: 0.85 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.85 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="relative flex h-8 w-8 items-center justify-center">
+              <motion.span
+                className="relative flex items-center justify-center"
+                animate={{ y: [0, -2, 0], rotate: [0, -6, 0] }}
+                transition={{ duration: 1.15, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-8 w-8">
+                  <path d="M14 3v10.15c-.57-.22-1.2-.35-1.86-.35-2.9 0-5.14 2-5.14 4.58S9.24 22 12.14 22c2.72 0 4.86-1.76 5.1-4.05l.01-.14V7.75l5.75-1.43V3.2L14 3zm-1.86 15.1c-1.62 0-2.94-1.03-2.94-2.32s1.32-2.32 2.94-2.32 2.94 1.03 2.94 2.32-1.32 2.32-2.94 2.32z" />
+                </svg>
+              </motion.span>
+            </span>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>

@@ -30,11 +30,11 @@ export const metadata: Metadata = {
     "You are cordially Invited to the wedding ceremony of Shahil on 22nd July 2026.",
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
+      { url: "/favicon.ico?v=2" },
+      { url: "/favicon-96x96.png?v=2", type: "image/png", sizes: "96x96" },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
-    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-touch-icon.png?v=2", sizes: "180x180", type: "image/png" }],
+    shortcut: "/favicon.ico?v=2",
   },
   manifest: "/site.webmanifest",
   openGraph: {

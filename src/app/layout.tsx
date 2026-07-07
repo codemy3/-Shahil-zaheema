@@ -30,14 +30,14 @@ export const metadata: Metadata = {
     "You are cordially Invited to the wedding ceremony of Shahil on 22nd July 2026.",
   openGraph: {
     title: "Shahil’s Wedding Invitation",
-    description: "You are cordially Invited to the wedding ceremony of Shahil on 22nd July 2026..",
+    description: "You are cordially Invited to the wedding ceremony of Shahil on 22nd July 2026.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Moideen & Mariyam's Wedding Invitation",
-    description: "You are cordially invited to celebrate the blessed union of Moideen and Mariyam on Wednesday, 22nd July 2026. Tap to open the invitation.",
+    title: "Shahil’s Wedding Invitation",
+    description: "You are cordially Invited to the wedding ceremony of Shahil on 22nd July 2026.",
   }
 };
 

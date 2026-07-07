@@ -130,7 +130,7 @@ export default function InvitationCard() {
           style={{ y: palaceY }}
         >
           <Image
-            src="/background.png"
+            src="/background.webp"
             alt="Hero Background"
             fill
             className="object-cover object-[center_25%]"
@@ -159,7 +159,7 @@ export default function InvitationCard() {
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           >
             <Image
-              src="/chandelier.png"
+              src="/chandelier.webp"
               alt=""
               fill
               className="object-contain"

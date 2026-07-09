@@ -176,19 +176,19 @@ export default function InvitationCard() {
           transition={{ duration: 1.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           style={{ y: heroTextY }}
         >
-          <h1 className="font-script font-bold text-[clamp(2.8rem,10vw,5rem)] leading-tight tracking-wide px-2" style={{ color: "#7A4D2A", textShadow: "0 3px 10px rgba(87,54,28,0.35), 0 0 20px rgba(255,248,238,0.35)" }}>
+          <h1 className="font-script font-black text-[clamp(3.2rem,12vw,6rem)] leading-tight tracking-[0.08em] px-2" style={{ color: "#7A4D2A", textShadow: "0 4px 12px rgba(87,54,28,0.4), 0 0 24px rgba(255,248,238,0.4)" }}>
             Moideen
           </h1>
-          <h1 className="font-script font-bold text-[clamp(2.8rem,10vw,5rem)] leading-tight tracking-wide px-2 -mt-2" style={{ color: "#7A4D2A", textShadow: "0 3px 10px rgba(87,54,28,0.35), 0 0 20px rgba(255,248,238,0.35)" }}>
+          <h1 className="font-script font-black text-[clamp(3.2rem,12vw,6rem)] leading-tight tracking-[0.08em] px-2 -mt-2" style={{ color: "#7A4D2A", textShadow: "0 4px 12px rgba(87,54,28,0.4), 0 0 24px rgba(255,248,238,0.4)" }}>
             Shahil
           </h1>
 
-          <p className="font-script font-normal text-3xl md:text-4xl my-0 opacity-95" style={{ color: "#7A4D2A", textShadow: "0 3px 10px rgba(87,54,28,0.35), 0 0 20px rgba(255,248,238,0.35)" }}>&</p>
+          <p className="font-script font-black text-[3.2rem] md:text-[3.8rem] my-0 opacity-95" style={{ color: "#7A4D2A", textShadow: "0 4px 12px rgba(87,54,28,0.4), 0 0 24px rgba(255,248,238,0.4)" }}>&</p>
 
-          <h1 className="font-script font-bold text-[clamp(2.8rem,10vw,5rem)] leading-tight tracking-wide px-2 -mt-1" style={{ color: "#7A4D2A", textShadow: "0 3px 10px rgba(87,54,28,0.35), 0 0 20px rgba(255,248,238,0.35)" }}>
+          <h1 className="font-script font-black text-[clamp(3.2rem,12vw,6rem)] leading-tight tracking-[0.08em] px-2 -mt-1" style={{ color: "#7A4D2A", textShadow: "0 4px 12px rgba(87,54,28,0.4), 0 0 24px rgba(255,248,238,0.4)" }}>
             Mariyam
           </h1>
-          <h1 className="font-script font-bold text-[clamp(2.8rem,10vw,5rem)] leading-tight tracking-wide px-2 -mt-2" style={{ color: "#7A4D2A", textShadow: "0 3px 10px rgba(87,54,28,0.35), 0 0 20px rgba(255,248,238,0.35)" }}>
+          <h1 className="font-script font-black text-[clamp(3.2rem,12vw,6rem)] leading-tight tracking-[0.08em] px-2 -mt-2" style={{ color: "#7A4D2A", textShadow: "0 4px 12px rgba(87,54,28,0.4), 0 0 24px rgba(255,248,238,0.4)" }}>
             Zaheema
           </h1>
         </motion.div>
@@ -215,14 +215,14 @@ export default function InvitationCard() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.3, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="text-[10px] uppercase tracking-[0.35em] text-[#6B4426] font-semibold mb-2" style={{ textShadow: "0 1px 4px rgba(255,255,255,0.7)" }}>
-            Scroll down
+          <p className="text-[14px] md:text-[16px] uppercase tracking-[0.5em] text-[#3a2718] font-black mb-3" style={{ textShadow: "0 1px 5px rgba(255,255,255,0.9)" }}>
+           <b> Scroll down </b>
           </p>
           <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
           >
-            <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="#8B5E3C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <svg viewBox="0 0 24 24" className="w-8 h-8 md:w-9 md:h-9" fill="none" stroke="#8B5E3C" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 5v14" />
               <path d="m6 13 6 6 6-6" />
             </svg>

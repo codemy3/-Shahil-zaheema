@@ -1,0 +1,21 @@
+{
+  "name": "Shahil's Wedding Invitation",
+  "short_name": "Shahil Wedding",
+  "icons": [
+    {
+      "src": "/file.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/next.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#C4943A",
+  "background_color": "#F7ECE2",
+  "display": "standalone"
+}

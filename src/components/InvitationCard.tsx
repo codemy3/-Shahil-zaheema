@@ -108,12 +108,7 @@ export default function InvitationCard() {
   const mapsUrl = "https://www.google.com/maps/search/?api=1&query=Indiana+Convention+Center+Jeppinamogaru+Mangaluru";
 
   return (
-    <div
-      className="absolute inset-0 z-10 w-full h-[100dvh] overflow-x-hidden overflow-y-auto scroll-smooth"
-      style={{
-        background: "radial-gradient(ellipse 120% 100% at 50% 0%, #FDE1D3 0%, #F7CEBB 55%, #EEBFA8 100%)",
-      }}
-    >
+    <div className="absolute inset-0 z-10 w-full h-[100dvh] overflow-x-hidden overflow-y-auto scroll-smooth">
       <NoiseOverlay />
       <AnimatedBlobs />
 {/* ══════════════════════════════════════════════════════ */}
@@ -236,17 +231,21 @@ export default function InvitationCard() {
       {/*  SECTION 2 — INVITATION ARCH CARD                    */}
       {/* ══════════════════════════════════════════════════════ */}
       <motion.div
-        className="relative mx-5 mt-8 mb-12 p-[2px] rounded-t-[160px] rounded-b-[24px] z-20"
-        style={{
-          background: "linear-gradient(135deg, rgba(209,161,136,0.75), rgba(255,244,238,0.55), rgba(209,161,136,0.75))",
-          boxShadow: "0 30px 60px -15px rgba(74,55,40,0.15)",
-        }}
+        className="relative w-full z-20 flex justify-center"
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
       >
-        <div className="w-full h-full rounded-t-[160px] rounded-b-[24px] px-8 pt-12 pb-10 flex flex-col items-center text-center bg-linear-to-b from-[#FDE5D9] to-[#F6CDBB] shadow-[inset_0_0_60px_rgba(132,88,69,0.04)] relative overflow-hidden">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Image
+            src="/background2.png"
+            alt="Section 2 Background"
+            fill
+            className="object-fill"
+          />
+        </div>
+        <div className="w-full h-full min-h-[800px] px-12 py-24 flex flex-col items-center justify-center text-center relative z-10 overflow-hidden">
 
           <motion.div variants={fadeUp}>
             <GeometricBorder className="w-48 h-5 mb-5 opacity-90" />
@@ -292,7 +291,7 @@ export default function InvitationCard() {
 
           <motion.div
             variants={fadeUp}
-            className="flex flex-col items-center mb-4 gap-2 rounded-[28px] border border-[#C4943A]/15 bg-[rgba(255,248,240,0.58)] px-6 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_8px_22px_rgba(132,88,69,0.08)]"
+            className="flex flex-col items-center mb-4 gap-2 px-6 py-4"
           >
             <div className="flex items-center gap-2 text-[#5A4535]">
               <svg viewBox="0 0 24 24" className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -341,11 +340,25 @@ export default function InvitationCard() {
             Your esteemed presence and duas will be the greatest blessing to the bride and groom.
           </motion.p>
 
-          <motion.p variants={fadeUp} className="text-[32px] font-script font-normal text-[#C4943A]">
+          <motion.p variants={fadeUp} className="text-[32px] font-script font-normal text-[#C4943A] mb-12">
             Dua is the Best Present
           </motion.p>
         </div>
       </motion.div>
+
+      {/* ══════════════════════════════════════════════════════ */}
+      {/*  SECTIONS 3 & 4 BACKGROUND WRAPPER                   */}
+      {/* ══════════════════════════════════════════════════════ */}
+      <div className="relative w-full z-20 flex justify-center">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Image
+            src="/background3.png"
+            alt="Sections 3 and 4 Background"
+            fill
+            className="object-fill"
+          />
+        </div>
+        <div className="w-full h-full min-h-[800px] px-6 py-24 flex flex-col items-center justify-center relative z-10 overflow-hidden">
 
       {/* ══════════════════════════════════════════════════════ */}
       {/*  SECTION 3 — MINIMAL COUNTDOWN (matches reference)   */}
@@ -488,6 +501,9 @@ export default function InvitationCard() {
           <GeometricBorder className="w-32 h-4 mt-6 opacity-70" />
         </motion.div>
       </motion.div>
+
+        </div>
+      </div>
     </div>
   );
 }

@@ -247,9 +247,7 @@ export default function InvitationCard() {
         </div>
         <div className="w-full h-full min-h-[800px] px-12 py-24 flex flex-col items-center justify-center text-center relative z-10 overflow-hidden">
 
-          <motion.div variants={fadeUp}>
-            <GeometricBorder className="w-48 h-5 mb-5 opacity-90" />
-          </motion.div>
+       
 
           <motion.p variants={fadeUp} className="font-serif text-[30px] mb-1 text-[#8B6914] drop-shadow-sm">
             بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ

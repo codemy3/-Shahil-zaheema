@@ -280,7 +280,7 @@ export default function InvitationCard() {
             with
           </motion.p>
 
-          <motion.h2 variants={fadeUp} className="font-serif text-[29px] md:text-[31px] font-bold tracking-wide md:tracking-widest mb-0 text-[#C4943A] whitespace-nowrap">
+          <motion.h2 variants={fadeUp} className="font-serif text-[28px] md:text-[30px] font-bold tracking-wide md:tracking-widest mb-0 text-[#C4943A] whitespace-nowrap">
             MARIYAM ZAHEEMA
           </motion.h2>
           <motion.p variants={fadeUp} className="text-[14px] font-serif italic mb-5 text-[#806654]">
